@@ -58,6 +58,13 @@ def load_data(
         all_files = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'images'))
         classes = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'labels'))
         instances = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'labels'))
+    elif dataset_mode == 'medical_ct':
+        # The edge is computed by the instances.
+        # However, the edge get from the labels and the instances are the same on CelebA.
+        # You can take either as instance input
+        all_files = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'images'))
+        classes = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'labels'))
+        instances = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'labels'))
     else:
         raise NotImplementedError('{} not implemented'.format(dataset_mode))
 
