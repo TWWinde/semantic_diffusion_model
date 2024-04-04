@@ -31,5 +31,5 @@ module load cuda
 python image_train.py --data_dir /data/private/autoPET/data_nnunet/DATASET/nnUNet_raw/Dataset522_body --dataset_mode medical_ct --lr 2e-5 --batch_size 4 \
 --attention_resolutions 32,16,8 --diffusion_steps 1000 --image_size 256 --learn_sigma True \
 --noise_schedule linear --num_channels 256 --num_head_channels 64 --num_res_blocks 2 --resblock_updown True \
---use_fp16 True --use_scale_shift_norm True --use_checkpoint True --num_classes 151 \
+--use_fp16 True --use_scale_shift_norm True --use_checkpoint True --num_classes 37 \
 --class_cond True --no_instance True --drop_rate 0.2 --resume_checkpoint OUTPUT/medical_ct/model.pt
