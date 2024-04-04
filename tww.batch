@@ -1,0 +1,35 @@
+#!/bin/bash -l
+
+#Slurm parameters
+#SBATCH --job-name=med_usis
+#SBATCH --output=med_usis%j.%N.out
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=4
+#SBATCH --time=6-23:00:00
+#SBATCH --mem=64G
+#SBATCH --nodes=1
+#SBATCH --gpus=1
+#SBATCH --qos=batch
+# SBATCH --nodes=1
+#SBATCH --gpus=rtx_a5000:1
+# SBATCH --gpus=geforce_rtx_2080ti:1
+# SBATCH --gpus=geforce_gtx_titan_x:1
+
+# Activate everything you need
+
+#conda activate /anaconda3/envs/myenv
+pyenv activate venv
+module load cuda
+# Run your python code
+
+#experiment_1 117718
+#python train.py --name usis_wavelet --dataset_mode ct2mri --gpu_ids 0 \
+#--dataroot /misc/data/private/autoPET/CT_MR --batch_size 4 --add_mask  \
+#--netDu wavelet --continue_train \
+#--model_supervision 0 --netG wavelet --channels_G 16  #16
+
+python image_train.py --data_dir ./data/ade20k --dataset_mode medical_ct --lr 2e-5 --batch_size 4 \
+--attention_resolutions 32,16,8 --diffusion_steps 1000 --image_size 256 --learn_sigma True \
+--noise_schedule linear --num_channels 256 --num_head_channels 64 --num_res_blocks 2 --resblock_updown True \
+--use_fp16 True --use_scale_shift_norm True --use_checkpoint True --num_classes 151 \
+--class_cond True --no_instance True --drop_rate 0.2 --resume_checkpoint OUTPUT/ADE20K-SDM-256CH/model.pt
