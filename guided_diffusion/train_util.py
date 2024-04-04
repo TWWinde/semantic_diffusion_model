@@ -263,7 +263,7 @@ class TrainLoop:
             ) as f:
                 th.save(self.opt.state_dict(), f)
 
-        dist.barrier()
+        # dist.barrier()
 
     def preprocess_input(self, data):
         # move to GPU and change data types
