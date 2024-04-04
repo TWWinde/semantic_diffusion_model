@@ -46,12 +46,6 @@ def main():
 
     logger.log("training...")
 
-    backend = "gloo" if not th.cuda.is_available() else "nccl"
-    os.environ["RANK"] = '0'
-    os.environ["WORLD_SIZE"] = '1'
-    os.environ["MASTER_PORT"] = '6012'
-    dist.init_process_group(backend=backend, init_method="env://")
-
     TrainLoop(
         model=model,
         diffusion=diffusion,
