@@ -47,6 +47,7 @@ def main():
     logger.log("training...")
 
     backend = "gloo" if not th.cuda.is_available() else "nccl"
+    os.environ["RANK"] = '0'
     dist.init_process_group(backend=backend, init_method="env://")
 
     TrainLoop(
