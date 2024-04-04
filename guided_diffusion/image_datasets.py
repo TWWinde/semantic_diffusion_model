@@ -59,8 +59,8 @@ def load_data(
         classes = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'labels'))
         instances = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'labels'))
     elif dataset_mode == 'medical_ct':
-        all_files = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'images'))
-        classes = _list_image_files_recursively(os.path.join(data_dir, 'train' if is_train else 'test', 'labels'))
+        all_files = _list_image_files_recursively(os.path.join(data_dir, 'imagesTr' if is_train else 'imagesTs'))
+        classes = _list_image_files_recursively(os.path.join(data_dir, 'labelsTr' if is_train else 'labelsTs'))
         instances = None
     else:
         raise NotImplementedError('{} not implemented'.format(dataset_mode))
