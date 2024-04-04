@@ -20,7 +20,7 @@
 #conda activate /anaconda3/envs/myenv
 pyenv activate venv
 module load cuda
-# Run your python code
+# Run your python code tww
 
 #experiment_1 117718
 #python train.py --name usis_wavelet --dataset_mode ct2mri --gpu_ids 0 \
