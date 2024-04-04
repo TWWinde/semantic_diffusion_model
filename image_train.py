@@ -4,6 +4,10 @@ Train a diffusion model on images.
 
 import os
 import argparse
+import torch as th
+import torch.distributed as dist
+
+
 
 from guided_diffusion import dist_util, logger
 from guided_diffusion.image_datasets import load_data
@@ -41,6 +45,10 @@ def main():
     )
 
     logger.log("training...")
+
+    backend = "gloo" if not th.cuda.is_available() else "nccl"
+    dist.init_process_group(backend=backend, init_method="env://")
+
     TrainLoop(
         model=model,
         diffusion=diffusion,
