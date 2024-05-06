@@ -187,7 +187,6 @@ class GaussianDiffusion:
     def q_sample(self, x_start, t, noise=None):
         """
         Diffuse the data for a given number of diffusion steps.
-        正向加噪音
 
         In other words, sample from q(x_t | x_0).
 
